@@ -1,0 +1,87 @@
+
+#header {
+    background-color: #333;
+    width: 98%;
+    height: 30px;
+    border: 1px black solid;
+    box-shadow: 0px 3px 3px #444;
+    border-radius: 3px;
+
+    text-align: center;
+    line-height: 5px;
+    color: #FFF;
+
+    padding: 10px;
+    margin-bottom: 10px;
+    vertical-align: top;
+}
+
+#left_menu {
+    background-color: #333;
+    width: 150px;
+    height: 650px;
+    border: 1px black solid;
+    box-shadow: 0px 3px 3px #444;
+    border-radius: 3px;
+
+    text-align: right;
+    color: #EEE;
+
+    float: left;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-bottom: 16px;
+    margin-right: 10px;
+
+    
+}
+
+#display_container{
+    width: 770px;
+    float: left;
+    clear: none;
+}
+
+.message_display{
+    background-color: #EEE;
+    width: 370px;
+    height: 130px;
+    border: 1px black solid;
+    box-shadow: 2px 3px 3px #444;
+    border-radius: 3px;
+
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    float: left;
+
+}
+.display_username{
+    text-align: left;
+    margin-left: 20px;
+    margin-bottom: -42px;
+    color: #34CCFF;
+
+}
+.display_time{
+    text-align: right;
+    margin-right: 20px;
+
+}
+.display_message{
+    margin-left: 30px;
+    margin-left: 30px;
+}
+.display_hashTag{
+    text-align: right;
+    text-align: bottom;
+    margin-right: 20px;
+}
+
+/*
+ * The form styling;
+ */
+ #tbox{
+    width: 90%;
+    height: 100px;
+ }

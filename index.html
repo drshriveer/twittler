@@ -3,25 +3,61 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
-  </head>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">  </head>
   <body>
     <script>
 
       $(document).ready(function(){
-        var $body = $('body');
-        $body.html('');
-
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
-
+        drawMessages();
       });
 
+      //draws messages in the message container
+      //currently only draws messages when loading without sorting
+      var drawMessages = function(){
+        var $disp = $('#display_container');
+        var index = streams.home.length - 1;
+
+        while(index >= 0){
+          var tweet = streams.home[index];
+          var tweetParts = seperateHashTag(tweet.message);
+          var $tweet = $('<div class="message_display"></div>');
+
+          $tweet.html('<h2 class="display_username"> @' + tweet.user + '</h2>'+
+           '<h5 class="display_time">' + userFriendlyTime(tweet.created_at) + '</h5>' + 
+           '<p class="display_message"> ' + tweetParts.message+ '</p>' +
+           '<h5 class="display_hashTag"> ' + tweetParts.hashtag + '<h5>');
+
+          $tweet.appendTo($disp);
+          index -= 1;
+        }
+      };
+
+      //seperates tweet.message into two parts:
+      //returns object with keys message and hashtag
+      var seperateHashTag = function(message){
+        //this assumes only one hash tag.
+        var hashmark = '#', msgLeng = message.length;
+        for(var i = 0; i < msgLeng; i++){
+          if(message[i] === hashmark){
+            return { message: message.slice(0,i), hashtag: message.slice(i,msgLeng) };
+          }
+        }
+        return { message: message, hashtag: ''};
+      };
+
+      //currently this returns the time elapsed in minutes
+      var userFriendlyTime = function(tweetDate){
+        var now = new Date();
+        var elapsedTime = ( now.getTime() - tweetDate.getTime() )/(1000*60);
+        return [Math.round(elapsedTime), 'mins ago'].join(' ');
+      }
+
+
     </script>
+
+    <div id="header"> <h1> Twittler </h1> </div>
+    <div id="left_menu"> </div>
+    <div id="display_container"> </div>
+
   </body>
 </html>
