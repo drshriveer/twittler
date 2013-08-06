@@ -8,18 +8,28 @@
     <script>
 
       $(document).ready(function(){
-        drawMessages();
+        
+        drawMessages(streams.home,streams.home.length - 1);
         drawUserNames();
+
+        $('.users').on('click',function(){
+            var user = $(this).data('user');
+            if(user === 'home'){
+              drawMessages(streams.home,streams.home.length - 1);
+            };
+            else{
+              drawMessages(streams.users[user],streams.users[user].length -1);
+            };
+        });
+
       });
 
-      //draws messages in the message container
-      //currently only draws messages when loading without sorting
-      var drawMessages = function(){
+        var drawMessages = function(stream,index){
         var $disp = $('#display_container');
-        var index = streams.home.length - 1;
+        $disp.html('');
 
         while(index >= 0){
-          var tweet = streams.home[index];
+          var tweet = stream[index];
           var tweetParts = seperateHashTag(tweet.message);
           var $tweet = $('<div class="message_display"></div>');
 
@@ -53,19 +63,30 @@
         return { message: message, hashtag: ''};
       };
 
-      //currently this returns the time elapsed in minutes
+      //currently this returns the time elapsed in minutes hours or days
       var userFriendlyTime = function(tweetDate){
         var now = new Date();
         var elapsedTime = ( now.getTime() - tweetDate.getTime() )/(1000*60);
-        return [Math.round(elapsedTime), 'mins ago'].join(' ');
+        if( elapsedTime < 60){
+          return [Math.round(elapsedTime), 'mins ago'].join(' ');
+        }
+        else if( elapsedTime > 60){
+          return [Math.round(elapsedTime/60), 'hours'].join(' ');
+        }
+        else{
+          return [Math.round(elapsedTime/(60*24)), 'days ago'].join(' ');
+        }
       }
 
 
     </script>
 
     <div id="header"> <h1> Twittler </h1> </div>
-    <div id="left_menu"> </div>
+    <div id="left_menu"> 
+      <h2> Users and Steams </h2>
+      <div class="users" data-user="home"> home </div> 
+    </div>
     <div id="display_container"> </div>
-
+    
   </body>
 </html>
