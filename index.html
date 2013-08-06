@@ -9,6 +9,7 @@
 
       $(document).ready(function(){
         drawMessages();
+        drawUserNames();
       });
 
       //draws messages in the message container
@@ -22,14 +23,21 @@
           var tweetParts = seperateHashTag(tweet.message);
           var $tweet = $('<div class="message_display"></div>');
 
-          $tweet.html('<h2 class="display_username"> @' + tweet.user + '</h2>'+
+          $tweet.html('<h3 class="display_username"> @' + tweet.user + '</h3>'+
            '<h5 class="display_time">' + userFriendlyTime(tweet.created_at) + '</h5>' + 
            '<p class="display_message"> ' + tweetParts.message+ '</p>' +
            '<h5 class="display_hashTag"> ' + tweetParts.hashtag + '<h5>');
 
           $tweet.appendTo($disp);
           index -= 1;
-        }
+        };
+      };
+
+      var drawUserNames = function(){
+        var $disp = $('#left_menu');
+        for (var name in streams.users){
+          $('<div class="users" data-user="' + name + '">' + name + '</div>').appendTo($disp);
+        };
       };
 
       //seperates tweet.message into two parts:
@@ -40,8 +48,8 @@
         for(var i = 0; i < msgLeng; i++){
           if(message[i] === hashmark){
             return { message: message.slice(0,i), hashtag: message.slice(i,msgLeng) };
-          }
-        }
+          };
+        };
         return { message: message, hashtag: ''};
       };
 

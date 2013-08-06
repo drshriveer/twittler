@@ -28,9 +28,6 @@
     color: #EEE;
 
     float: left;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 16px;
     margin-right: 10px;
 
 }
@@ -79,10 +76,18 @@
     margin-right: 20px;
 }
 
-/*
- * The form styling;
- */
- #tbox{
-    width: 90%;
-    height: 100px;
+.users{
+    background-color: #EEE;
+    width: 138px;
+    height: 40px;
+    border: 1px black solid;
+    box-shadow: 2px 2px 10px #CFF;
+    border-radius: 6px;
+
+    text-align: center;
+    vertical-align: middle;
+    color: #000;
+
+    margin: 5px;
+    margin-top: 10px;
  }
