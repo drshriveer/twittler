@@ -33,7 +33,6 @@
     padding-bottom: 16px;
     margin-right: 10px;
 
-    
 }
 
 #display_container{
@@ -45,7 +44,7 @@
 .message_display{
     background-color: #EEE;
     width: 370px;
-    height: 130px;
+    height: 100px;
     border: 1px black solid;
     box-shadow: 2px 3px 3px #444;
     border-radius: 3px;
@@ -66,11 +65,13 @@
 .display_time{
     text-align: right;
     margin-right: 20px;
+    margin-bottom: -10px;
 
 }
 .display_message{
     margin-left: 30px;
     margin-left: 30px;
+    margin-bottom: -5px;
 }
 .display_hashTag{
     text-align: right;
