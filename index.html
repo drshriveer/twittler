@@ -7,24 +7,37 @@
   <body>
     <script>
 
+      var currentStream = 'home';
+
       $(document).ready(function(){
-        
-        drawMessages(streams.home,streams.home.length - 1);
+
         drawUserNames();
+        $('.users').first().addClass('highlighted');
+        autoRefresh();
 
         $('.users').on('click',function(){
-            var user = $(this).data('user');
-            if(user === 'home'){
-              drawMessages(streams.home,streams.home.length - 1);
-            };
-            else{
-              drawMessages(streams.users[user],streams.users[user].length -1);
-            };
+          $('.users').removeClass('highlighted');
+          $(this).addClass('highlighted');
+          currentStream = $(this).data('user');
+          refreshTweets();
         });
-
       });
 
-        var drawMessages = function(stream,index){
+      var autoRefresh = function(){
+        refreshTweets();
+        setTimeout(autoRefresh, 10000);
+      };
+
+      var refreshTweets = function(){
+        if(currentStream === 'home'){
+          drawStream(streams.home,streams.home.length - 1);
+        }
+        else{
+          drawStream(streams.users[currentStream],streams.users[currentStream].length -1);
+        }
+      };
+
+      var drawStream = function(stream,index){
         var $disp = $('#display_container');
         $disp.html('');
 
@@ -42,6 +55,7 @@
           index -= 1;
         };
       };
+
 
       var drawUserNames = function(){
         var $disp = $('#left_menu');
