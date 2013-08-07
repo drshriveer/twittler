@@ -3,6 +3,7 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="moment.min.js"></script>
     <link rel="stylesheet" type="text/css" href="stylesheet.css">  </head>
   <body>
     <script>
@@ -47,7 +48,7 @@
           var $tweet = $('<div class="tweet"></div>');
 
           $tweet.html('<h3 class="tweet_username"> @' + tweet.user + '</h3>'+
-           '<h5 class="tweet_time">' + userFriendlyTime(tweet.created_at) + '</h5>' + 
+           '<h5 class="tweet_time">' + moment(tweet.created_at).fromNow() + '</h5>' + 
            '<p class="tweet_message"> ' + tweetParts.message+ '</p>' +
            '<h5 class="tweet_hashTag"> ' + tweetParts.hashtag + '<h5>');
 
@@ -76,22 +77,6 @@
         };
         return { message: message, hashtag: ''};
       };
-
-      //currently this returns the time elapsed in minutes hours or days
-      var userFriendlyTime = function(tweetDate){
-        var now = new Date();
-        var elapsedTime = ( now.getTime() - tweetDate.getTime() )/(1000*60);
-        if( elapsedTime < 60){
-          return [Math.round(elapsedTime), 'mins ago'].join(' ');
-        }
-        else if( elapsedTime > 60){
-          return [Math.round(elapsedTime/60), 'hours'].join(' ');
-        }
-        else{
-          return [Math.round(elapsedTime/(60*24)), 'days ago'].join(' ');
-        }
-      }
-
 
     </script>
 
