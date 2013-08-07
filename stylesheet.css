@@ -15,6 +15,8 @@
     margin-bottom: 10px;
     vertical-align: top;
 }
+    
+/*  left menu & links  */
 
 #left_menu {
     background-color: #333;
@@ -29,9 +31,51 @@
 
     float: left;
     margin-right: 10px;
+    overflow: hidden;
+}
+
+#composeTweet{
+    width: 95%;
+    height: 100px;
+    margin: 5px;
+    background-color: #EEE;
+
+    color: #333;
+}
+
+
+#tweetButton{
+    width: 31%;
+    padding: 3px;
+    margin-left: 93px;
+    margin-bottom: 20px;
+    background-color: #890;
+    border: 1px black solid;
+
+
+    text-align: right;
+
 
 }
 
+.streams{
+    width: 95%;
+
+    text-align: right;
+    color: #EEE;
+    font-size: 1.2em;
+    padding-right: 10px;
+    margin-top: 15px;
+ }
+
+ .highlighted{
+    box-shadow: 0px 0px 10px #FF0;
+ }
+
+
+
+
+/* tweets */
 #tweet_container{
     overflow: auto;
     width: 780px;
@@ -47,7 +91,6 @@
     padding: 0px;
     margin-right: 10px;
     margin-bottom: 10px;
-    overflow: none;
 
     border: 1px black solid;
     box-shadow: 2px 3px 3px #444;
@@ -88,6 +131,7 @@
     text-align: left;
     font-size: 0.8em;
 }
+
 .tweet_time{
     width: 70%;
     height: 20px;
@@ -100,17 +144,3 @@
     font-size: 0.8em;
 }
 
-
-.streams{
-    width: 100%;
-
-    text-align: center;
-    color: #EEE;
-    font-size: 1.2em;
-
-    margin-top: 5px;
- }
-
- .highlighted{
-    box-shadow: 0px 0px 10px #FF0;
- }

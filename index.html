@@ -9,20 +9,37 @@
     <script>
 
       var currentStream = 'home';
-
+      var visitor = 'guest';
 
       $(document).ready(function(){
+
+        visitor = prompt("What's your name?");
+        streams.users[visitor] = [];
 
         drawUserNames();
         $('.streams').first().addClass('highlighted');
         autoRefresh();
 
+        //highlights the stream that is being viewed
         $('.streams').on('click',function(){
           currentStream = $(this).data('stream');
           $('.streams').removeClass('highlighted');
           $(this).addClass('highlighted');
           refreshTweets();
         });
+
+        //on click submits text.
+        $('#tweetButton').on('click',function(){
+          writeTweet( $('#composeTweet').text() );
+          $('#composeTweet').text('type here!');
+          refreshTweets();
+        });
+
+        //makes input box max count 255
+        $('#composeTweet').on('keyup',function(){
+          $("#composeTweet").text().length;
+        });
+
 
         // **** mouseovers were originally placed here
         // **** but due to a bug they were placed in refreshTweets()
@@ -103,7 +120,9 @@
     <div id="header"> <h1> Twittler </h1> </div>
     
     <div id="left_menu"> 
-      <h2> Users and Steams </h2>
+      <h2> Streams </h2>
+      <div id="composeTweet" spellcheck="true" contenteditable="true" multiline="true">type here! </div>
+      <div id="tweetButton"> Tweet! </div>
       <div class="streams" data-stream="home"> home </div> 
 
     </div>
