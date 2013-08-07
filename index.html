@@ -17,9 +17,9 @@
         autoRefresh();
 
         $('.streams').on('click',function(){
+          currentStream = $(this).data('stream');
           $('.streams').removeClass('highlighted');
           $(this).addClass('highlighted');
-          currentStream = $(this).data('stream');
           refreshTweets();
         });
       });
@@ -83,7 +83,7 @@
     <div id="header"> <h1> Twittler </h1> </div>
     <div id="left_menu"> 
       <h2> Users and Steams </h2>
-      <div class="streams" data-user="home"> home </div> 
+      <div class="streams" data-stream="home"> home </div> 
     </div>
     <div id="tweet_container"> </div>
     
