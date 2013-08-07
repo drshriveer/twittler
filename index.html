@@ -10,6 +10,7 @@
 
       var currentStream = 'home';
 
+
       $(document).ready(function(){
 
         drawUserNames();
@@ -22,6 +23,10 @@
           $(this).addClass('highlighted');
           refreshTweets();
         });
+
+        // **** mouseovers were originally placed here
+        // **** but due to a bug they were placed in refreshTweets()
+        // 
       });
 
       var autoRefresh = function(){
@@ -36,6 +41,17 @@
         else{
           drawStream(streams.users[currentStream],streams.users[currentStream].length -1);
         }
+
+        // allows user to see exact time and date of post on mouseover.
+        // this was moved here from document.ready() because after new tweets are drawn
+        // the mouseover event is no longer attached to the '.tweet_time' divs 
+        //   -- might this solution lead to memory leaks?        
+        $('.tweet_time').on('mouseenter',function() {
+          $(this).html(  moment($(this).data('time')).format('MMMM Do YYYY, h:mm:ss a') );
+        });
+        $('.tweet_time').on('mouseleave', function() {
+          $(this).html(  moment($(this).data('time')).fromNow() );
+        });
       };
 
       var drawStream = function(stream,index){
@@ -47,10 +63,12 @@
           var tweetParts = seperateHashTag(tweet.message);
           var $tweet = $('<div class="tweet"></div>');
 
-          $tweet.html('<h3 class="tweet_username"> @' + tweet.user + '</h3>'+
-           '<h5 class="tweet_time">' + moment(tweet.created_at).fromNow() + '</h5>' + 
-           '<p class="tweet_message"> ' + tweetParts.message+ '</p>' +
-           '<h5 class="tweet_hashTag"> ' + tweetParts.hashtag + '<h5>');
+          $tweet.html(
+           '<div class="tweet_username"> @' + tweet.user + '</div>'+
+           '<div class="tweet_message"> ' + tweetParts.message+ '</div>' +
+           '<div class="tweet_hashTag"> ' + tweetParts.hashtag + '</div>' +
+           '<div class="tweet_time" data-time="'+tweet.created_at+'">' + moment(tweet.created_at).fromNow() + '</div>'
+           );
 
           $tweet.appendTo($disp);
           index -= 1;
@@ -80,11 +98,16 @@
 
     </script>
 
+<!-- THIS IS WHERE THE HTML STARTS AND THE SCRIPT STOPS -->
+
     <div id="header"> <h1> Twittler </h1> </div>
+    
     <div id="left_menu"> 
       <h2> Users and Steams </h2>
       <div class="streams" data-stream="home"> home </div> 
+
     </div>
+
     <div id="tweet_container"> </div>
     
   </body>
