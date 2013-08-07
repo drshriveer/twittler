@@ -12,13 +12,13 @@
       $(document).ready(function(){
 
         drawUserNames();
-        $('.users').first().addClass('highlighted');
+        $('.streams').first().addClass('highlighted');
         autoRefresh();
 
-        $('.users').on('click',function(){
-          $('.users').removeClass('highlighted');
+        $('.streams').on('click',function(){
+          $('.streams').removeClass('highlighted');
           $(this).addClass('highlighted');
-          currentStream = $(this).data('user');
+          currentStream = $(this).data('stream');
           refreshTweets();
         });
       });
@@ -38,18 +38,18 @@
       };
 
       var drawStream = function(stream,index){
-        var $disp = $('#display_container');
+        var $disp = $('#tweet_container');
         $disp.html('');
 
         while(index >= 0){
           var tweet = stream[index];
           var tweetParts = seperateHashTag(tweet.message);
-          var $tweet = $('<div class="message_display"></div>');
+          var $tweet = $('<div class="tweet"></div>');
 
-          $tweet.html('<h3 class="display_username"> @' + tweet.user + '</h3>'+
-           '<h5 class="display_time">' + userFriendlyTime(tweet.created_at) + '</h5>' + 
-           '<p class="display_message"> ' + tweetParts.message+ '</p>' +
-           '<h5 class="display_hashTag"> ' + tweetParts.hashtag + '<h5>');
+          $tweet.html('<h3 class="tweet_username"> @' + tweet.user + '</h3>'+
+           '<h5 class="tweet_time">' + userFriendlyTime(tweet.created_at) + '</h5>' + 
+           '<p class="tweet_message"> ' + tweetParts.message+ '</p>' +
+           '<h5 class="tweet_hashTag"> ' + tweetParts.hashtag + '<h5>');
 
           $tweet.appendTo($disp);
           index -= 1;
@@ -60,7 +60,7 @@
       var drawUserNames = function(){
         var $disp = $('#left_menu');
         for (var name in streams.users){
-          $('<div class="users" data-user="' + name + '">' + name + '</div>').appendTo($disp);
+          $('<div class="streams" data-stream="' + name + '">' + name + '</div>').appendTo($disp);
         };
       };
 
@@ -98,9 +98,9 @@
     <div id="header"> <h1> Twittler </h1> </div>
     <div id="left_menu"> 
       <h2> Users and Steams </h2>
-      <div class="users" data-user="home"> home </div> 
+      <div class="streams" data-user="home"> home </div> 
     </div>
-    <div id="display_container"> </div>
+    <div id="tweet_container"> </div>
     
   </body>
 </html>

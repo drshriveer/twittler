@@ -32,7 +32,7 @@
 
 }
 
-#display_container{
+#tweet_container{
     overflow: auto;
     width: 780px;
     height: 670px;
@@ -40,7 +40,7 @@
     clear: none;
 }
 
-.message_display{
+.tweet{
     background-color: #EEE;
     width: 370px;
     height: 100px;
@@ -54,31 +54,31 @@
     float: left;
 
 }
-.display_username{
+.tweet_username{
     text-align: left;
     margin-left: 20px;
     margin-bottom: -42px;
     color: #34CCFF;
 
 }
-.display_time{
+.tweet_time{
     text-align: right;
     margin-right: 20px;
     margin-bottom: -10px;
 
 }
-.display_message{
+.tweet_message{
     margin-left: 30px;
     margin-left: 30px;
     margin-bottom: -5px;
 }
-.display_hashTag{
+.tweet_hashTag{
     text-align: right;
     text-align: bottom;
     margin-right: 20px;
 }
 
-.users{
+.streams{
     background-color: #EEE;
     width: 138px;
     height: 40px;
