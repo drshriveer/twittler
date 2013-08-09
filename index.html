@@ -13,14 +13,16 @@
 
       $(document).ready(function(){
 
+        // asks visitor for their name and initiates that visitor
         visitor = prompt("What's your name?");
         streams.users[visitor] = [];
 
-        drawUserNames();
+        // sets up and draws content
+        drawStreamLinks();
         $('.streams').first().addClass('highlighted');
         autoRefresh();
 
-        //highlights the stream that is being viewed
+        // highlights the stream that is being viewed
         $('.streams').on('click',function(){
           currentStream = $(this).data('stream');
           $('.streams').removeClass('highlighted');
@@ -28,29 +30,35 @@
           refreshTweets();
         });
 
-        //on click submits text.
+        // on click submits text.
         $('#tweetButton').on('click',function(){
           writeTweet( $('#composeTweet').text() );
           $('#composeTweet').text('type here!');
           refreshTweets();
         });
 
-        //makes input box max count 255
+        // makes input box max char count 255
         $('#composeTweet').on('keyup',function(){
-          $("#composeTweet").text().length;
+          var len = $("#composeTweet").text().length;
+           if(len > 256){
+              alert("sorry! no more than 256 characters!");
+             $("#composeTweet").text($("#composeTweet").text().substr(0,255)+'...');
+           }
         });
-
 
         // **** mouseovers were originally placed here
         // **** but due to a bug they were placed in refreshTweets()
-        // 
+        
       });
-
+      
+      // sets time out for refreshing tweets
       var autoRefresh = function(){
         refreshTweets();
         setTimeout(autoRefresh, 10000);
       };
 
+      // picks which stream to draw again
+      // links the mouseovers to the dates/time stamp
       var refreshTweets = function(){
         if(currentStream === 'home'){
           drawStream(streams.home,streams.home.length - 1);
@@ -71,6 +79,7 @@
         });
       };
 
+      // draws the tweets from a selected stream
       var drawStream = function(stream,index){
         var $disp = $('#tweet_container');
         $disp.html('');
@@ -92,18 +101,18 @@
         };
       };
 
-
-      var drawUserNames = function(){
+      // draws the stream links on the left navigation bar.
+      var drawStreamLinks = function(){
         var $disp = $('#left_menu');
         for (var name in streams.users){
           $('<div class="streams" data-stream="' + name + '">' + name + '</div>').appendTo($disp);
         };
       };
 
-      //seperates tweet.message into two parts:
-      //returns object with keys message and hashtag
+      // seperates tweet.message into two parts:
+      // returns object with keys message and hashtag
       var seperateHashTag = function(message){
-        //this assumes only one hash tag.
+        // this assumes only one hash tag.
         var hashmark = '#', msgLeng = message.length;
         for(var i = 0; i < msgLeng; i++){
           if(message[i] === hashmark){
