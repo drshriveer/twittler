@@ -46,9 +46,14 @@
            }
         });
 
-        // **** mouseovers were originally placed here
-        // **** but due to a bug they were placed in refreshTweets()
-        
+        // allows user to see exact time and date of post on mouseover.
+        $('#tweet_container').on('mouseenter','.tweet_time',function() {
+          $(this).html(  moment($(this).data('time')).format('MMMM Do YYYY, h:mm:ss a') );
+        });
+        $('#tweet_container').on('mouseleave', '.tweet_time', function() {
+          $(this).html(  moment($(this).data('time')).fromNow() );
+        });
+
       });
       
       // sets time out for refreshing tweets
@@ -66,17 +71,6 @@
         else{
           drawStream(streams.users[currentStream],streams.users[currentStream].length -1);
         }
-
-        // allows user to see exact time and date of post on mouseover.
-        // this was moved here from document.ready() because after new tweets are drawn
-        // the mouseover event is no longer attached to the '.tweet_time' divs 
-        //   -- might this solution lead to memory leaks?        
-        $('.tweet_time').on('mouseenter',function() {
-          $(this).html(  moment($(this).data('time')).format('MMMM Do YYYY, h:mm:ss a') );
-        });
-        $('.tweet_time').on('mouseleave', function() {
-          $(this).html(  moment($(this).data('time')).fromNow() );
-        });
       };
 
       // draws the tweets from a selected stream
